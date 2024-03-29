@@ -17,6 +17,7 @@ venv/
 # Firebase key and configuration
 key/
 *.json
+Icon?
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints

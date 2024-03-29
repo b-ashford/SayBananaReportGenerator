@@ -1,0 +1,6 @@
+setup.py
+src/SBReportGenerator.egg-info/PKG-INFO
+src/SBReportGenerator.egg-info/SOURCES.txt
+src/SBReportGenerator.egg-info/dependency_links.txt
+src/SBReportGenerator.egg-info/requires.txt
+src/SBReportGenerator.egg-info/top_level.txt
