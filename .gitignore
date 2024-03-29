@@ -1,0 +1,26 @@
+# Local files
+test_data/
+key/
+
+# Compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python virtual environment
+venv/
+.env
+
+# macOS-specific files
+.DS_Store
+._*
+# Firebase key and configuration
+key/
+*.json
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Logs and databases
+*.log
+*.sqlite
