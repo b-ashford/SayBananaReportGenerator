@@ -26,3 +26,10 @@ username_email@email.com,Fishing,0,22-03-2024 10:51:07
 username_email@email.com,Fishing,1,22-03-2024 10:51:31
 ...
 ```
+
+## Example Report
+<p align="center">
+  <img src="images/example_report.png" alt="Example Image" width="700" style="border: 2px solid black;">
+</p>
+
+
