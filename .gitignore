@@ -1,6 +1,8 @@
 # Local files
 test_data/
 key/
+test/test.png
+output/
 
 # Compiled Python files
 __pycache__/

@@ -1,5 +1,5 @@
 from utils.user_stats import UserStats
-
+import sys
 
 def load_user_productions_content(file: str):
     content = []
@@ -24,7 +24,5 @@ def generate_user_report(user_productions: str, output_pdf: str):
 
 if __name__ == "__main__":
 
-    files = ["test/user_productions.txt", "test/user_productions-2.txt"]
-    outputs = ["output/test1.pdf", "output/test2.pdf"]
-    for file, output in zip(files, outputs):
-        generate_user_report(file, output)
+    generate_user_report("test/user_productions.txt", "output/test1.pdf")
+    generate_user_report("test/user_productions-2.txt", "output/test2.pdf")
