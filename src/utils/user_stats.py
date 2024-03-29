@@ -221,7 +221,8 @@ class UserStats:
         set_text(pdf=pdf, text=text, x=50, y=650)
         text = f"Date Generated:  {get_from_date(from_today=True)}"
         set_text(pdf=pdf, text=text, x=50, y=675)
-
+        disclaimer = "Accuracy is based on the user's entries during the speech exercises ([✔] Correct, [✘] Try Again)"
+        set_text(pdf=pdf, text=disclaimer, x=45, y=25)
         # draw_ruler(pdf)
         pdf.save()
         return filename

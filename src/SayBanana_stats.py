@@ -3,7 +3,7 @@ from utils.user_stats import UserStats
 
 def load_user_productions_content(file: str):
     content = []
-    with open(file, "r") as file:
+    with open(file, "r") as file:  
         for line in file.readlines():
             content.append(line.rstrip())
     return content

@@ -30,7 +30,7 @@ def init_pdf(filename="reports/SayBananaReport.pdf"):
     return pdf
 
 
-def set_title(pdf, title="Say Banana Report", fontisize=22, height=725):
+def set_title(pdf, title="Your Say Bananas! Activity", fontisize=22, height=725):
     pdf.setFont("Helvetica", fontisize)
     page_width = letter[0]
     title_width = pdfmetrics.stringWidth(title, "Helvetica", fontisize)
