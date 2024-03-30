@@ -13,4 +13,8 @@ setup(
     exclude=("__pycache__",),
     description="SayBanana app user productions report generator.",
     author="Bronston Ashford",
+    package_data={
+        "": ["images/*.png"],
+    },
+    include_package_data=True,
 )

@@ -1,5 +1,5 @@
 
-from SayBanana_stats import generate_user_report
+from SBReportGenerator import generate_user_report
 
 
 

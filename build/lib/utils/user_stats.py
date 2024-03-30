@@ -11,9 +11,6 @@ from utils.user_dates import (
 )
 from datetime import datetime
 from utils.pdf_maker import init_pdf, set_title, draw_ruler, set_image, set_text
-import pkg_resources
-
-DATA_PATH = pkg_resources.resource_filename("SBReportGenerator", "images")
 
 
 CORRECT = "1"
@@ -55,7 +52,7 @@ class UserStats:
             if line:
                 uid.add(line.split(",")[0].strip())
         if len(uid) != 1:
-            print("ERROR: Multiple UIDs found:", list(uid), file=sys.stderr)
+            print("ERROR: Multiple UIDs found:", uid, file=sys.stderr)
             sys.exit(1)
         return list(uid)[0]
 
@@ -207,32 +204,25 @@ class UserStats:
         fig = plot_percentage_of_words_accuracy_bar_chart(
             self.daily_stats, from_today=from_today
         )
-        figure1_path = f"{DATA_PATH}/figure1.png"
+        figure1_path = "images/figure1.png"
         png = save_png(fig, figure1_path)
         return png
 
     def create_pdf_report(self, filename):
         pdf = init_pdf(filename=filename)
         set_title(pdf, height=730)
-        set_image(
-            pdf=pdf, x=40, y=700, max_height=70, image=f"{DATA_PATH}/say66_logo.png")
+        set_image(pdf=pdf, x=50, y=725, max_height=40, image="images/say66_logo.png")
 
         figure = self.get_percentage_of_word_accuracy_img(from_today=False)
-        table = self.create_table(
-            from_today=False, save_path=f"{DATA_PATH}/table.png")
-
+        table = self.create_table(from_today=False, save_path="images/table.png")
         set_image(pdf=pdf, x=40, y=420, image=figure, max_width=520)
         set_image(pdf=pdf, x=40, y=200, image=table, max_width=570)
         text = f"Player User ID:   {self.uid}"
-        set_text(pdf=pdf, text=text, x=40, y=650)
+        set_text(pdf=pdf, text=text, x=50, y=650)
         text = f"Date Generated:  {get_from_date(from_today=True)}"
-        set_text(pdf=pdf, text=text, x=40, y=675)
+        set_text(pdf=pdf, text=text, x=50, y=675)
         disclaimer = "Accuracy is based on the user's entries during the speech exercises ([✔] Correct, [✘] Try Again)"
-        set_text(pdf=pdf, text=disclaimer, x=80, y=25, font_size=10)
+        set_text(pdf=pdf, text=disclaimer, x=45, y=25)
         # draw_ruler(pdf)
         pdf.save()
         return filename
-
-
-if __name__ == "__main__":
-    up = "test/data/user_productions-3.txt"
