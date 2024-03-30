@@ -10,8 +10,17 @@ from utils.user_dates import (
     get_from_date,
 )
 from datetime import datetime
-from utils.pdf_maker import init_pdf, set_title, draw_ruler, set_image, set_text
+from utils.pdf_maker import (
+    init_pdf,
+    set_title,
+    draw_ruler,
+    set_image,
+    set_text,
+    set_image_top_aligned,
+)
 import pkg_resources
+from PIL import Image
+
 
 DATA_PATH = pkg_resources.resource_filename("SBReportGenerator", "images")
 
@@ -215,21 +224,33 @@ class UserStats:
         pdf = init_pdf(filename=filename)
         set_title(pdf, height=730)
         set_image(
-            pdf=pdf, x=40, y=700, max_height=70, image=f"{DATA_PATH}/say66_logo.png")
+            pdf=pdf, x=40, y=700, max_height=70, image=f"{DATA_PATH}/say66_logo.png"
+        )
 
         figure = self.get_percentage_of_word_accuracy_img(from_today=False)
-        table = self.create_table(
-            from_today=False, save_path=f"{DATA_PATH}/table.png")
+        table = self.create_table(from_today=False, save_path=f"{DATA_PATH}/table.png")
 
         set_image(pdf=pdf, x=40, y=420, image=figure, max_width=520)
-        set_image(pdf=pdf, x=40, y=200, image=table, max_width=570)
         text = f"Player User ID:   {self.uid}"
         set_text(pdf=pdf, text=text, x=40, y=650)
         text = f"Date Generated:  {get_from_date(from_today=True)}"
         set_text(pdf=pdf, text=text, x=40, y=675)
         disclaimer = "Accuracy is based on the user's entries during the speech exercises ([✔] Correct, [✘] Try Again)"
         set_text(pdf=pdf, text=disclaimer, x=80, y=25, font_size=10)
-        # draw_ruler(pdf)
+
+        # Check table image size
+        table_image_path = f"{DATA_PATH}/table.png"
+        with Image.open(table_image_path) as img:
+            width, height = img.size
+
+        # Define your size threshold (e.g., height in pixels)
+        height_threshold = 700
+        if height > height_threshold:
+            pdf.showPage()
+            set_image_top_aligned(pdf, table_image_path, x=40, top_y=750, max_width=570)
+        else:
+            set_image_top_aligned(pdf, table_image_path, x=40, top_y=400, max_width=570)
+
         pdf.save()
         return filename
 

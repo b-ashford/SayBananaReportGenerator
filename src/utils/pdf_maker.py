@@ -99,3 +99,42 @@ def set_text(pdf, text, font_size=12, x=None, y=100, font_name="Helvetica"):
         text_width = pdfmetrics.stringWidth(text, font_name, font_size)
         x = (page_width - text_width) / 2
     pdf.drawString(x, y, text)
+
+
+def set_image_top_aligned(pdf, image, x, top_y, max_width=None, max_height=None):
+    """
+    Adjusted set_image function to position the top of the image at a specific height, allowing it to expand downwards.
+    """
+    if isinstance(image, str):
+        img = ImageReader(image)
+        iw, ih = img.getSize()
+    elif isinstance(image, Image.Image):
+        iw, ih = image.size
+        buf = io.BytesIO()
+        image.save(buf, format="PNG")
+        buf.seek(0)
+        img = ImageReader(buf)
+    else:
+        raise ValueError(
+            "Invalid image input. Must be a file path or a PIL Image object."
+        )
+
+    aspect_ratio = iw / float(ih)
+    if max_width:
+        scale_factor = max_width / iw
+        scaled_height = ih * scale_factor
+        y = top_y - scaled_height  # Adjust y to align the top of the image
+    else:
+        # If max_width is not specified, assume the image is not scaled.
+        y = top_y - ih
+
+    pdf.drawImage(
+        img,
+        x,
+        y,
+        width=max_width,
+        height=scaled_height if max_width else None,
+        mask="auto",
+    )
+    if isinstance(image, Image.Image):
+        buf.close()

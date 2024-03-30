@@ -44,9 +44,13 @@ def make_word_table(data):
     # Color map creation
     cmap = mcolors.LinearSegmentedColormap.from_list("", [WRONG_COLOUR, CORRECT_COLOUR])
 
-    # Create a figure and a set of subplots
-    # fig, ax = plt.subplots(figsize=(12, len(df_intensity) * 0.5))
-    fig, ax = plt.subplots(figsize=(15, 5))
+    num_rows = df_raw.shape[0]
+    row_height = 0.15  # Example row height in inches
+    extra_space = 4  # Extra space in inches for title, labels, etc.
+    total_height = num_rows * row_height + extra_space
+
+    # Adjust figsize dynamically for height
+    fig, ax = plt.subplots(figsize=(15, total_height))
 
     # Heatmap plotting with grid lines
     sns_heatmap = sns.heatmap(
@@ -79,15 +83,28 @@ def make_word_table(data):
 
 if __name__ == "__main__":
 
-    data = {
-        "09-03-2024": {
+    data1 = {
+        "20-03-2024": {
             "Pin": (4, 0, 0, 100.0),
             "Pop": (4, 0, 0, 100.0),
             "Cat": (2, 0, 0, 100.0),
             "Peep": (8, 0, 0, 100.0),
             "Pig": (0, 6, 0, 0.0),
             "Pen": (2, 0, 0, 100.0),
-            "Pear": (4, 2, 0, 67.0),
+            "Pea": (4, 2, 0, 67.0),
+            "Pear1": (4, 2, 0, 67.0),
+            "Pear2": (4, 2, 0, 67.0),
+            "Pear3": (4, 2, 0, 67.0),
+            "Pear4": (4, 2, 0, 67.0),
+            "Pear5": (4, 2, 0, 67.0),
+            "Pear6": (4, 2, 0, 67.0),
+            "Pear7": (4, 2, 0, 67.0),
+            "Pear8": (4, 2, 0, 67.0),
+            "Pear9": (4, 2, 0, 67.0),
+            "Pear10": (4, 2, 0, 67.0),
+            "Pear11": (4, 2, 0, 67.0),
+            "Pear12": (4, 2, 0, 67.0),
+            "Pear13": (4, 2, 0, 67.0),
         },
         "10-03-2024": {
             "Pen": (2, 0, 0, 100.0),
@@ -98,7 +115,9 @@ if __name__ == "__main__":
             "Baby": (2, 0, 0, 100.0),
             "Back": (2, 0, 0, 100.0),
             "Pin": (0, 4, 0, 0.0),
-        },
+        }
+    }
+    data2 = {
         "12-03-2024": {
             "Pen": (2, 0, 0, 100.0),
             "Cat": (4, 0, 0, 100.0),
@@ -140,5 +159,5 @@ if __name__ == "__main__":
         },
         "12-03-2024": {},
     }
-    fig = make_word_table(data)
+    fig = make_word_table(data2)
     save_png(fig, "test/table.png")
