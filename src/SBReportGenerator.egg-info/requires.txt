@@ -1,5 +1,0 @@
-reportlab
-matplotlib
-pandas
-seaborn
-pygsheets
