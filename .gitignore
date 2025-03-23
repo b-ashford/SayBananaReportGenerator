@@ -9,6 +9,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Python package distribution artifacts
+*.egg
+*.egg-info/
+.eggs/
+
 # Python virtual environment
 venv/
 .env
@@ -16,10 +21,11 @@ venv/
 # macOS-specific files
 .DS_Store
 ._*
+Icon?
+
 # Firebase key and configuration
 key/
 *.json
-Icon?
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
